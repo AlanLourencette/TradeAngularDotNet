@@ -1,3 +1,13 @@
-<body>
-  <app-home></app-home>
-</body>
+<div *ngIf="!autenticado">
+  <app-login (autenticadoEmitter)="Autenticado()"></app-login>
+</div>
+
+<div *ngIf="autenticado">
+    <app-topbar (autenticadoEmitter)="Desautenticar()"></app-topbar>
+    <div class='d-flex'>
+      <app-sidebar></app-sidebar>
+      <div class='content'>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+</div>

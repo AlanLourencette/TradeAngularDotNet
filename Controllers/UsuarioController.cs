@@ -1,30 +1,43 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using TradeAngularDotNet.Banco;
 using TradeAngularDotNet.Model;
 using TradeAngularDotNet.Repositorios;
 using TradeAngularDotNet.Services;
 
 namespace TradeAngularDotNet.Controllers
 {
+    
     [ApiController]
-    [Route("usuario")]
+    [Route("api/usuario")]
     public class UsuarioController : ControllerBase
     {
+        private readonly ApplicationDbContext Contexto;
+
+        public UsuarioController(ApplicationDbContext context)
+        {
+            Contexto = context;
+        }
+
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> AutenticarAsync([FromBody] Usuario usuario)
+        public async Task<ActionResult<dynamic>> Login([FromBody] Usuario usuario)
         {
-            var user = UsuarioRepositorio.Get(usuario.Username, usuario.Password);
+            var usuarioEncontrado = Contexto.Usuario
+                .FirstOrDefault(u => u.Username == usuario.Username && u.Password == usuario.Password);
 
-            if(user == null)
-                return NotFound(new { message = "Usuário ou senha inválidos"});
+            if (usuarioEncontrado == null)
+            {
+                return NotFound("Usuário não encontrado");
+            }
 
-            var token = TokenService.GerarToken(user);
+            var token = TokenService.GerarToken(usuarioEncontrado);
 
             return new
             {
-                user = user,
+                user = usuarioEncontrado,
                 token = token
             };
         }

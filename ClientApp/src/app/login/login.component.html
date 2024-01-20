@@ -1,0 +1,37 @@
+<div class="login-form">
+    <div class="container rounded p-5">
+      <div class="container2">
+      <h1>Login</h1>
+  
+      <div class="validation-error">
+        <p *ngIf="invalidUser">Usuário ou Senha incorretos.</p>
+      </div>
+  
+      <form [formGroup]="formulario" (ngSubmit)="Autenticar()" #formDir="ngForm">
+        <div class="form-group">
+          <label>Usuário</label>
+          <input 
+            type="text" 
+            class="form-control form-control-sm"
+            formControlName="username"
+          />
+          <div *ngIf="username.invalid && formDir.submitted" class="validation-error">
+            <p *ngIf="username.errors?.['required']">O Usuário é obrigatório.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input 
+            type="password" 
+            class="form-control form-control-sm"
+            formControlName="password"
+          />
+          <div *ngIf="password.invalid && formDir.submitted" class="validation-error">
+            <p *ngIf="password.errors?.['required']">A senha é obrigatória.</p>
+          </div>
+        </div>
+        <button class="button" type="submit">Entrar</button>
+      </form>
+      </div>
+    </div>
+  </div>

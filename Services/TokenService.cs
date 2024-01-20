@@ -19,6 +19,7 @@ namespace TradeAngularDotNet.Services
                 {
                     new Claim(ClaimTypes.Name, usuario.Username)
                 }),
+                Expires = DateTime.UtcNow.AddMinutes(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 

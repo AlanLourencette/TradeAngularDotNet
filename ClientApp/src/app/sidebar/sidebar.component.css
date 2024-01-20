@@ -1,0 +1,39 @@
+.sidebar {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 230px;
+}
+
+
+/* Adapte as propriedades conforme necessário */
+
+.nav-item {
+    /* Tamanho do item */
+    width: 100%;
+    max-width: 200px; /* Ajuste conforme necessário */
+
+    /* Borda */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    /* Espaçamento entre os itens */
+    margin-bottom: 10px; /* Ajuste conforme necessário */
+
+    /* Espaçamento interno */
+    padding: 10px; /* Ajuste conforme necessário */
+
+    /* Estilo do cursor ao passar o mouse */
+    cursor: pointer;
+
+    /* Cor de fundo ao passar o mouse */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.nav-item:hover {
+    /*background-color: #f0f0f0;  Ajuste conforme necessário */
+    background-color: #d4d4d4;
+    color: #000000;
+}
